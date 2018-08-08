@@ -21,20 +21,26 @@ type Names struct {
 // send the parameter `db *sql.DB` to be used by another functions
 func dbConn() (db *sql.DB) {
 
-	dbDriver := "mysql"   // Database driver
-	dbUser := ""      // Mysql username
-	dbPass := "" // Mysql password
-	dbName := ""   // Mysql schema
+	dbDriver := "mysql" // Database driver
+
+	// DNS  username:password@protocol(address)/dbname
+	//dnsMysql := "mejia231_go_crud:go_crud@tcp(108.167.169.50:3306)/mejia231_go_crud"
+	//dnsMysql := "root:msql@tcp(172.17.0.2:3306)/go_crud"
+
+	//dnsMysql := "mejia231_user:23duda@tcp(108.167.169.50:3306)/mejia231_go_crud"
+	//dnsMysql := "mejia231_user:23duda@tcp(mejias.com.br:3306)/mejia231_go_crud"
+
+	dnsMysql := "root:mysql@tcp(localhost:3306)/go_crud"
 
 	// Realize the connection with mysql driver
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	db, err := sql.Open(dbDriver, dnsMysql)
 
 	// If error stop the application
 	if err != nil {
 		panic(err.Error())
 	}
 
-	// Return db object to be used by other functions
+	// Return db object to be used by another functions
 	return db
 }
 
